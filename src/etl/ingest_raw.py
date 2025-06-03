@@ -13,4 +13,4 @@ churn_df = pd.read_csv(csv_path)
 
 churn_df.to_sql('raw_churn', engine, if_exists='replace', index=False)
 
-print(f"Ingested {len(df)} rows into raw_churn")
+print(f"Ingested {len(churn_df)} rows into raw_churn")
