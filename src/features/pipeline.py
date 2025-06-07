@@ -17,8 +17,8 @@ def loading_model_df():
 
 def build_feature_pipeline():
 
-    numeric_features = ['tenure', 'MonthlyCharges', 'TotalCharges', 'avg_monthly_churn']
-    categorical_features = ['InternetService','Contract', 'PaymentMethod', 'tenure_bucket', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',                   'StreamingMovies']
+    numeric_features = ['tenure', 'MonthlyCharges', 'TotalCharges', 'avg_monthly_charge']
+    categorical_features = ['InternetService','Contract', 'PaymentMethod', 'tenure_bucket', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies']
 
     numeric_transformer = StandardScaler()
     categorical_transformer = OneHotEncoder(drop='first',sparse_output=False)
