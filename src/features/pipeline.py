@@ -25,7 +25,7 @@ def build_feature_pipeline():
 
     preprocessor = ColumnTransformer(transformer=[
         ('num', numeric_transformer, numeric_features),
-        ('cat',categoric_transformer,categorical_features)
+        ('cat',categorical_transformer,categorical_features)
     ])
     return preprocessor
 
