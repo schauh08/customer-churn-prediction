@@ -24,12 +24,12 @@ CREATE TABLE modeling_churn AS
 
 
 
-        CASE WHEN OnlineSecurity = 'No internet service' THEN 'No' ELSE OnlineSecurity END AS OnlineSecurity
-        CASE WHEN OnlineBackup = 'No internet service' THEN 'No' ELSE OnlineBackup END AS OnlineBackup
-        CASE WHEN DeviceProtection = 'No internet service' THEN 'No' ELSE DeviceProtection END AS DeviceProtection 
-        CASE WHEN TechSupport = 'No internet service' THEN 'No' ELSE TechSupport END AS TechSupport
-        CASE WHEN StreamingTV = 'No internet service' THEN 'No' ELSE StreamingTV END AS StreamingTV
-        CASE WHEN StreamingMovies = 'No internet service' THEN 'No' ELSE StreamingMovies END AS StreamingMovies
+        CASE WHEN OnlineSecurity = 'No internet service' THEN 'No' ELSE OnlineSecurity END AS OnlineSecurity,
+        CASE WHEN OnlineBackup = 'No internet service' THEN 'No' ELSE OnlineBackup END AS OnlineBackup,
+        CASE WHEN DeviceProtection = 'No internet service' THEN 'No' ELSE DeviceProtection END AS DeviceProtection, 
+        CASE WHEN TechSupport = 'No internet service' THEN 'No' ELSE TechSupport END AS TechSupport,
+        CASE WHEN StreamingTV = 'No internet service' THEN 'No' ELSE StreamingTV END AS StreamingTV,
+        CASE WHEN StreamingMovies = 'No internet service' THEN 'No' ELSE StreamingMovies END AS StreamingMovies,
 
         Contract,
         PaymentMethod,
