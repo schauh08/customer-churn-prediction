@@ -30,7 +30,7 @@ def build_feature_pipeline():
     return preprocessor
 
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 
     df = loading_modeling_df()
     X = df.drop(columns=['customerID', 'churn_flag'])
