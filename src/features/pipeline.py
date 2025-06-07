@@ -37,7 +37,8 @@ if __name__ == '__main__':
     y = df['churn_flag'].values
 
     pipeline = build_feature_pipeline()
-    X_transformed = pipeline.fit_transform(X)
+    pipeline.fit(X)
+    X_transformed = pipeline.transform(X)
 
     
     print("Original shape:", X.shape)
