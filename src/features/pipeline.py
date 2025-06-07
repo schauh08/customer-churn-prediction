@@ -32,9 +32,13 @@ def build_feature_pipeline():
 
 if __name__ == '__main__':
 
-    df = loading_modeling_df()
+    df = loading_model_df()
     X = df.drop(columns=['customerID', 'churn_flag'])
     y = df['churn_flag'].values
 
+    pipeline = build_feature_pipeline()
+    X_transformed = pipeline.fit_transform(X)
+
+    
     print("Original shape:", X.shape)
     print("Transformed shape:", X_transformed.shape)
