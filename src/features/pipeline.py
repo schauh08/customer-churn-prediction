@@ -8,7 +8,7 @@ import os
 script_dir = os.path.dirname(__file__)
 project_root = os.path.abspath(os.path.join(script_dir, os.pardir, os.pardir))
 db_path = os.path.join(project_root,'churn.db')
-engine = create_engine(f'sqlite:///{db_path}', echo=false)
+engine = create_engine(f'sqlite:///{db_path}', echo=False)
 
 def loading_model_df():
 
@@ -24,7 +24,7 @@ def build_feature_pipeline():
     categorical_transformer = OneHotEncoder(drop='first',spare=False)
 
     preprocessor = ColumnTransformer(transformer=[
-        ('num', numeric_transformer, numeric_features)
+        ('num', numeric_transformer, numeric_features),
         ('cat',categoric_transformer,categorical_features)
     ])
     return preprocessor
