@@ -21,7 +21,7 @@ def build_feature_pipeline():
     categorical_features = ['InternetService','Contract', 'PaymentMethod', 'tenure_bucket', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport', 'StreamingTV',                   'StreamingMovies']
 
     numeric_transformer = StandardScaler()
-    categorical_transformer = OneHotEncoder(drop='first',spare=False)
+    categorical_transformer = OneHotEncoder(drop='first',sparse=False)
 
     preprocessor = ColumnTransformer(transformer=[
         ('num', numeric_transformer, numeric_features),
