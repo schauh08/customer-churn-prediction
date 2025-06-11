@@ -4,7 +4,7 @@ CREATE TABLE modeling_churn AS
     SELECT 
         customerID,
 
-        CASE WHEN Churn = 'YES' THEN 1 ELSE 0 END AS churn_flag,
+        CASE WHEN Churn = 'Yes' THEN 1 ELSE 0 END AS churn_flag,
 
 
         tenure,

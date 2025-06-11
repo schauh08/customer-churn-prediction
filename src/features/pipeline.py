@@ -3,6 +3,7 @@ import numpy as np
 from sqlalchemy import create_engine
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.impute import SimpleImputer
 import os 
 
 def loading_model_df():
@@ -17,33 +18,25 @@ def loading_model_df():
 def build_manual_pipeline(df):
 
     numeric_features = ['tenure', 'MonthlyCharges', 'TotalCharges', 'avg_monthly_charge']
-    categorical_features = ['InternetService','Contract', 'PaymentMethod', 'tenure_bucket', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection', 'TechSupport',           'StreamingTV', 'StreamingMovies']
-
-    print(df[numeric_features].dtypes)
+    categorical_features = ['InternetService','Contract', 'PaymentMethod', 'tenure_bucket', 'OnlineSecurity', 'OnlineBackup', 'DeviceProtection',               'TechSupport','StreamingTV', 'StreamingMovies']
 
     for col in numeric_features:
-        bad = df[col].apply(lambda x: isinstance(x,str))
-        if bad.any():
-            print(f"Non-numeric values in {col}:\n", df. loc[bad, col].unique())
+        df[col] = pd.to_numeric(df[col].astype(str).str.strip(), errors='coerce')
 
-    df[numeric_features] = (
-        df[numeric_features]
-        .applymap(lambda x: str(x).strip())
-        .applymap(pd.to_numeric, error ='coerce')
-    )
     
+    imputer = SimpleImputer(strategy='median')
+    num_imputed = imputer.fit_transform(df[numeric_features])
     
-    df.dropna(subset=numeric_features)
 
     scaler = StandardScaler()
-    num_arr = scaler.fit_transform(df[numeric_features])
+    num_arr = scaler.fit_transform(num_imputed)
 
 
-    encoder = OneHotEncoder(drop='first', sparse_output='False')
-    cat_arr = encoder.fit_transform(df[categorical_features].isna().sum())
+    encoder = OneHotEncoder(drop='first', sparse_output=False)
+    cat_arr = encoder.fit_transform(df[categorical_features])
     
-    x = np.hstack([num_arr, cat_arr])
-    feature_names = numeric_features + list(encoder.get_features_names_out(categorical_features))
+    X = np.hstack([num_arr, cat_arr])
+    feature_names = numeric_features + list(encoder.get_feature_names_out(categorical_features))
     return X, feature_names
 
     
