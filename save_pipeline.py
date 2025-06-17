@@ -12,6 +12,8 @@ model = LogisticRegression(max_iter=1000, class_weight = 'balanced')
 model.fit(X,y)
 
 joblib.dump({  
-    'model': model,  
-    'feature_names': feature_names  
-}, 'models/churn_pipeline.pkl')
+  'imputer': imputer,
+  'scaler':   scaler,
+  'encoder':  encoder,
+  'model':    model
+}, 'models/prepro_pipeline.pkl')
