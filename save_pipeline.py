@@ -1,6 +1,11 @@
 import joblib
 from src.features.pipeline import build_manual_pipeline, loading_model_df
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.linear_model import LogisticRegression
+
 
 df = loading_model_df()
 X_df = df.drop(columns=['customerID','churn_flag'])
