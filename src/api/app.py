@@ -15,7 +15,7 @@ from src.features.pipeline import build_manual_pipeline
 
 app = Flask(__name__)
 
-artefact = joblib.load('model/churn_pipeline.pk1')
+artefact = joblib.load('model/churn_pipeline.pkl')
 model = artefact['model']
 feature_names = artefact['feature_names']
 
