@@ -19,6 +19,8 @@ artefact = joblib.load(os.path.join(project_root, 'models', 'churn_pipeline.pkl'
 model = artefact['model']
 feature_names = artefact['feature_names']
 
+
+@app.route('/predict', methods=['POST'])
 def predict():
 
     data = request.get_json()
