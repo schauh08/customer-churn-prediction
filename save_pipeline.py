@@ -27,7 +27,7 @@ preprocessor = ColumnTransformer([
         ('impute', SimpleImputer(strategy='median')),
         ('scale',  StandardScaler())
     ]), numeric_features),
-    ('cat', OneHotEncoder(drop='first', sparse=False), categorical_features),
+    ('cat', OneHotEncoder(drop='first', sparse_output=False), categorical_features),
 ])
 
 pipeline = Pipeline([
