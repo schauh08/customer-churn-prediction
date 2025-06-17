@@ -40,6 +40,14 @@ pipeline = Pipeline([
                         random_state=42
                     ))
 ])
+for col in numeric_features:
+    X_df[col] = (
+         X_df[col]
+        .astype(str)              
+        .str.strip()              
+         .replace('', np.nan)      
+        .pipe(pd.to_numeric, errors='coerce')  
+    )
 
 pipeline.fit(X_df, y)
 
