@@ -31,6 +31,7 @@ preprocessor = ColumnTransformer([
 ])
 
 preprocessor.feature_names_in_ = X_df.columns.to_list()
+
 pipeline = Pipeline([
     ('preprocessor', preprocessor),
     ('classifier',   LogisticRegression(
