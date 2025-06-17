@@ -36,7 +36,6 @@ def predict():
 
     proba = model.predict_proba(X)[0,1]
     return jsonify({'churn_probability': float(proba)})
-    })
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
