@@ -1,24 +1,48 @@
+import os
 import joblib
-from src.features.pipeline import build_manual_pipeline, loading_model_df
+import pandas as pd
+
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.linear_model import LogisticRegression
 
+from src.features.pipeline import loading_model_df
 
 df = loading_model_df()
-X_df = df.drop(columns=['customerID','churn_flag'])
+X_df = df.drop(columns=['customerID', 'churn_flag'])
+y    = df['churn_flag'].values
 
-X, feature_names = build_manual_pipeline(X_df)
-y = df['churn_flag'].values
+numeric_features = ['tenure', 'MonthlyCharges', 'TotalCharges', 'avg_monthly_charge']
+categorical_features = [
+    'InternetService','Contract','PaymentMethod','tenure_bucket',
+    'OnlineSecurity','OnlineBackup','DeviceProtection',
+    'TechSupport','StreamingTV','StreamingMovies'
+]
 
-model = LogisticRegression(max_iter=1000, class_weight = 'balanced')
-model.fit(X,y)
+preprocessor = ColumnTransformer([
+    
+    ('num', Pipeline([
+        ('impute', SimpleImputer(strategy='median')),
+        ('scale',  StandardScaler())
+    ]), numeric_features),
+    ('cat', OneHotEncoder(drop='first', sparse=False), categorical_features),
+])
 
-joblib.dump({  
-  'imputer': imputer,
-  'scaler':   scaler,
-  'encoder':  encoder,
-  'model':    model
-}, 'models/prepro_pipeline.pkl')
+pipeline = Pipeline([
+    ('preprocessor', preprocessor),
+    ('classifier',   LogisticRegression(
+                        max_iter=1000,
+                        class_weight='balanced',
+                        random_state=42
+                    ))
+])
+
+pipeline.fit(X_df, y)
+
+os.makedirs('models', exist_ok=True)
+
+output_path = os.path.join('models', 'churn_pipeline.pkl')
+joblib.dump(pipeline, output_path)
+print(f"Saved full pipeline (preprocessor + model) to {output_path}")
