@@ -16,7 +16,7 @@ from src.features.pipeline import build_manual_pipeline
 app = Flask(__name__)
 
 artefact = joblib.load(os.path.join(project_root, 'models', 'churn_pipeline.pkl'))
-model = artefact['models']
+model = artefact['model']
 feature_names = artefact['feature_names']
 
 def predict():
