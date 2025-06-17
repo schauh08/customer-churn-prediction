@@ -30,7 +30,7 @@ preprocessor = ColumnTransformer([
     ('cat', OneHotEncoder(drop='first', sparse_output=False), categorical_features),
 ])
 
-preprocessor.feature_names_in_ = X_df.columns.to_list()
+preprocessor.feature_names_in_ = numeric_features + categorical_features
 
 pipeline = Pipeline([
     ('preprocessor', preprocessor),
