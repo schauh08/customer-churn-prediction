@@ -1,5 +1,4 @@
-# customer-churn-predication
-
+```
 Customer Churn Prediction & Segmentation
 
 Project Overview
@@ -18,7 +17,7 @@ Customer Segmentation: K-Means clustering (k=4) with cluster profiling and reten
 API Deployment: Flask service exposing /predict endpoint for real-time scoring.
 
 Repository Structure
-'''
+
 customer-churn-prediction/
 ├── README.md
 ├── LICENSE
@@ -43,7 +42,7 @@ customer-churn-prediction/
 │   └── churn_pipeline.pkl
 ├── reports/
 │   └── churn_report.pdf
-'''
+
 
 Setup & Installation
 
@@ -90,3 +89,4 @@ Contributions welcome! Please fork, create a feature branch, and submit a pull r
 License
 
 This project is licensed under the MIT License.
+```
