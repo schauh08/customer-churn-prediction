@@ -18,7 +18,7 @@ Customer Segmentation: K-Means clustering (k=4) with cluster profiling and reten
 API Deployment: Flask service exposing /predict endpoint for real-time scoring.
 
 Repository Structure
-
+'''
 customer-churn-prediction/
 ├── README.md
 ├── LICENSE
@@ -43,7 +43,7 @@ customer-churn-prediction/
 │   └── churn_pipeline.pkl
 ├── reports/
 │   └── churn_report.pdf
-
+'''
 
 Setup & Installation
 
